@@ -1,0 +1,27 @@
+version: "2"
+
+services:
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:6.3.1
+    user: root
+    volumes:
+      - ./filebeat/conf/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    links:
+      - "elasticsearch"
+    logging:
+        driver: "json-file"
+        options:
+            max-size: 100m
+            max-file: "5"
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.3.1
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.3.1
+    links:
+      - "elasticsearch"
+    ports:
+      - "5601:5601"
