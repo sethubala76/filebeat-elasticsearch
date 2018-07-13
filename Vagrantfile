@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
     config.vm.define "node#{i}" do |subconfig|
       subconfig.vm.box = BOX_IMAGE
       subconfig.vm.hostname = "master#{i}.example.com"
-      subconfig.vm.network :private_network, ip: "192.168.33.#{i + 15}"
+      subconfig.vm.network :private_network, ip: "192.168.33.15"
 	  subconfig.vm.network :forwarded_port, guest: 5601, host: 5601
       subconfig.vm.provider "virtualbox" do |v|
         v.memory = 2048
