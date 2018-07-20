@@ -1,1 +1,1 @@
-0 0 * * * curator --config /config/curator.yml /config/delete_indices.yml
+0 1 * * * curator --config /config/curator.yml /config/delete_indices.yml
